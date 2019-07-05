@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: this task will ping
+      command: whoami
+    - name: this will ping all the server
+      ping: 
+    - name: installing tree
+      apt:
+        name: tree
+        state: latest
+
