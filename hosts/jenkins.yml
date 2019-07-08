@@ -1,0 +1,30 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: installing java in ubuntu
+      apt_repository:
+        repo: ppa:webupd8team/java
+    - name: updating repo
+      command: apt-get update
+    - name: installing java in ubuntu
+      apt:
+        name: openjdk-8-jdk
+        update_cache: yes
+    - name: installing tomcat7 in ubuntu
+      apt:
+        name: tomcat7 
+        state: present
+    - name: starting tomcat service
+      service:
+        name: tomcat7
+        state: started 
+    - name: Enable service httpd, and not touch the state
+      service:
+        name: tomcat7
+        enabled: yes
+    - name: Download jenkins.war
+      get_url:
+        url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+        dest: /var/lib/tomcat7/webapps
+         
