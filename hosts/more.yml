@@ -1,0 +1,12 @@
+---
+- hosts: appserver
+  become: yes
+  tasks:
+    - name: installing "{{ item }}"
+      apt:
+        name: "{{ item }}"
+      with_items:
+      - git
+      - tree
+      - wget
+      - sendmail

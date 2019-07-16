@@ -1,0 +1,16 @@
+--- 
+- hosts: appserver
+  tasks: 
+  - name: displaying contents of file
+    command: cat /home/ansible/testfile
+    register: mycontent
+    ignore_errors: yes
+  - name: now display the contents
+    debug:
+      msg: "{{ mycontent }}"
+  - name: find exact output
+    debug:
+      msg: "{{ mycontent.stdout}}"
+  - name: find error
+    debug:
+      msg: "{{ mycontent.stderr }}"

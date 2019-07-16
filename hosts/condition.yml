@@ -1,0 +1,19 @@
+---
+- hosts: appserver
+  become: yes
+  tasks:
+    - name: updating apache server
+      command: apt update
+    - name: installing apache server
+      apt:
+        name: apache2
+        state: present
+      when:  ansible_os_family == "Debian"
+    - name: installing httpd server on redhat
+      yum:
+        name: httpd
+        state: present
+      when:  ansible_os_family == "RedHat"
+    - name: check memory of Real memroy instance
+      debug:
+        msg: "Free Ram is {{ansible_memory_mb.real.free}}"
