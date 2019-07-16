@@ -1,0 +1,3 @@
+---
+log_folder: '/home/ansible'
+check_command: 'do not know'

@@ -1,0 +1,18 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+  - name: installing nginx in ubuntu
+    apt:
+      name: nginx
+      state: present
+      update_cache: yes
+  - name: Start service nginx, if not started
+    service:
+        name: nginx
+        state: started
+    notify:
+      - restart nginx
+  handlers:
+    - name: restart apache2
+      service: name=nginx state=restarted

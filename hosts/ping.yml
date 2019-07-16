@@ -1,0 +1,12 @@
+---
+- hosts: appserver
+  tasks:
+    - name: pinging server
+      ping:
+    - name: this will show the value
+      debug:
+        msg: "{{ log_folder }}"
+    - name: this will print host name
+      debug:
+        msg: "{{ check_command }}"
+                                 
