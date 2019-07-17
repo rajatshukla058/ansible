@@ -1,0 +1,9 @@
+---
+- hosts: appserver
+  tasks:
+    - name: get the value of all predefined variable
+      vars:
+        disription: "This is my custom variable"
+      template:
+        src: info.j2
+        dest: /home/ansible/info
