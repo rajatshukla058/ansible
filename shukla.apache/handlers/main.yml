@@ -1,0 +1,10 @@
+---
+# handlers file for shukla.apache
+- name: restart debian apache
+  service: 
+    name: "{{apache_package_deb}}"
+    state: restarted
+- name: restart redhat server
+  service:
+    name: "{{apache_package_rpm}}"
+    state: restarted

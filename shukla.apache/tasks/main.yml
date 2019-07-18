@@ -1,0 +1,36 @@
+---
+# tasks file for shukla.apache
+- name: install apache on debian machine
+  apt:
+    name: "{{apache_package_deb}}"
+    state: present
+  when: ansible_os_family == "Debian"
+- name: install httpd on redhat
+  yum:
+    name: "{{apache_package_rpm}}"
+    state: present
+  when: ansible_os_family == "RedHat"
+- name: setting variable 
+  set_fact: 
+    apache_package: "{{apache_package_deb}}"
+  when: ansible_os_family == "Debian"
+- name: setting service variable for redhat
+  set_fact:
+    apache_package: "{{apache_package_rpm}}"
+  when: ansible_os_family == "RedHat"
+- name: enabling apache service
+  service:
+    name: "{{apache_package}}"
+    enabled: yes
+    state: started
+- name: test by print
+  debug:
+    msg: notifying handler
+  notify: restart debian apache
+  when: ansible_os_family == "Debian"
+- name: test by print if it is redhat
+  debug:
+    msg: This is for notifying redHat version
+  notify: restart redhat server
+
+  when: ansible_os_family == "Redhat"
